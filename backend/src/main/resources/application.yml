@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: revisemind-backend
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/revisemind}
+    username: ${DB_USERNAME:revisemind}
+    password: ${DB_PASSWORD:revisemind_pass}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  endpoint:
+    health:
+      show-details: always
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+    expiration-ms: 86400000
+  default-time-zone: ${APP_DEFAULT_TIME_ZONE:Asia/Kolkata}

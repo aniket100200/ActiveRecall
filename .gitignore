@@ -1,0 +1,20 @@
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*.DS_Store
+Thumbs.db
+
+# Build & Dependencies
+backend/target/
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.tsbuildinfo
+
+# Environment & Secrets
+.env
+*.local
+
+# Logs
+*.log
