@@ -68,7 +68,7 @@ public class DashboardService {
         Instant startOfToday = nowZoned.toLocalDate().atStartOfDay(zone).toInstant();
 
         // Upcoming or due today pending tasks
-        var tasks = revisionTaskRepository.findDueToday(user.getId(), startOfToday, Instant.ofEpochMilli(Long.MAX_VALUE), null, null, PageRequest.of(0, limit));
+        var tasks = revisionTaskRepository.findPendingDueFrom(user.getId(), startOfToday, PageRequest.of(0, limit));
         return tasks.getContent().stream().map(RevisionTaskDto::fromEntity).toList();
     }
 }

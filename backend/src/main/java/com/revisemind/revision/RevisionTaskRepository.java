@@ -86,6 +86,19 @@ public interface RevisionTaskRepository extends JpaRepository<RevisionTask, UUID
     );
 
     @Query("""
+        SELECT r FROM RevisionTask r
+        WHERE r.studySession.topic.subject.user.id = :userId
+          AND r.status = 'PENDING'
+          AND r.dueAt >= :fromInstant
+        ORDER BY r.dueAt ASC
+    """)
+    Page<RevisionTask> findPendingDueFrom(
+        @Param("userId") UUID userId,
+        @Param("fromInstant") Instant fromInstant,
+        Pageable pageable
+    );
+
+    @Query("""
         SELECT COUNT(r) FROM RevisionTask r
         WHERE r.studySession.topic.subject.user.id = :userId
           AND r.status = 'PENDING'
